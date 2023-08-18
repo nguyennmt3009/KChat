@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kchat/components/message-bubble.dart';
 import 'package:kchat/models/message.dart';
 import 'package:kchat/apis/chatgpt.dart';
-import 'dart:math';
 
 class ChatBox extends StatefulWidget {
   const ChatBox({super.key});
@@ -15,7 +14,6 @@ class _ChatBoxState extends State<ChatBox> {
   final textFieldController = TextEditingController();
 
   bool isLoading = false;
-  final _random = Random();
   List<Message> messageList = [];
 
   @override

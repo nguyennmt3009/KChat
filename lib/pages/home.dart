@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kchat/utils/native_method.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -8,6 +9,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  Future<void> _setupRakutenPoint() async {
+    NativeMethod.invokeMethod(NativeMethodType.setupRakutenPoint);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +44,18 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 ),
                 child: const Text('START'),
+              ),
+              const SizedBox(height: 30.0),
+              FilledButton(
+                onPressed: () {
+                  _setupRakutenPoint();
+                },
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 205, 41, 41),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                ),
+                child: const Text('楽天ポイントカード'),
               ),
             ],
           )
