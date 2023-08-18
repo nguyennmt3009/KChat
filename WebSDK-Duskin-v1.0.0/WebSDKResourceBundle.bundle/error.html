@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Error | 楽天ポイントカード</title>
+  </head>
+
+  <style>
+    /* ========================= BASE =========================  */
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: inherit;
+      font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", Meiryo,
+        メイリオ, "ＭＳ Ｐゴシック", "MS P Gothic", Helvetica, sans-serif;
+    }
+
+    html {
+      font-size: 62.5%;
+      overflow: hidden;
+    }
+
+    body {
+      box-sizing: border-box;
+    }
+
+    img,
+    picture {
+      display: block;
+      max-width: 100%;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    * {
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* ========================= UTILS =========================  */
+
+    .u-flex-xy--center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ========================= LAYOUT =========================  */
+    .header {
+      height: 4.4rem;
+      width: 100vw;
+    }
+
+    .header__border-bottom--on {
+      border-bottom: 0.1rem solid #cccccc;
+    }
+
+    .header__wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: inherit;
+      width: 50rem;
+
+      padding-left: 1.975rem;
+      padding-right: 2.575rem;
+    }
+
+    @media only screen and (max-width: 20em) {
+      .header__wrapper {
+        width: 100%;
+      }
+    }
+
+    .header__left {
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+
+    #header__left-icon--close {
+      cursor: pointer;
+    }
+
+    .header__middle-logo {
+      width: 3.2rem;
+      height: 3.2rem;
+      margin-left: 2.175rem;
+    }
+
+    .header__middle-title {
+      width: 12.7rem;
+      height: 2.4rem;
+      margin-left: 0.8rem;
+      margin-right: 1.5rem;
+    }
+
+    .header__right {
+      position: relative;
+      align-self: center;
+      height: 2.4rem;
+      width: 2.4rem;
+    }
+
+    #header__right-icon--close {
+      width: 1.65rem;
+      height: 1.65rem;
+      background-image: url("img/common/icon_close_webview.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+    }
+
+    /* ----------------------- */
+    .error__top-text {
+      margin-top: 3rem;
+      text-align: center;
+      margin-left: 1.6rem;
+      margin-right: 1.6rem;
+    }
+
+    .error__middle-text {
+      margin-left: 1.6rem;
+      margin-right: 1.6rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .error__middle-text-section {
+      margin-top: 3rem;
+      border-top: 1px solid #888888;
+      border-bottom: 1px solid #888888;
+    }
+
+    .error__middle-text-button-div {
+      margin-bottom: 3rem;
+      margin-left: 1.6rem;
+      margin-right: 1.6rem;
+    }
+
+    .error__middle-text-button {
+      max-width: 34.3rem;
+      width: 100%;
+      height: 4.8rem;
+      border-radius: 0.5rem;
+      border: 0.2rem solid #bf0000;
+      background-color: #ffffff;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2.4rem;
+    }
+    /* ========================= TYPOGRAPHY =========================  */
+    .header__middle-title {
+      font-size: 1.4rem;
+    }
+
+    header__right-a {
+      font-size: 1.5rem;
+      color: #333333;
+    }
+
+    .error__top-text {
+      font-size: 1.9rem;
+      line-height: 2.85rem;
+      color: #ba0509;
+      font-weight: bold;
+    }
+
+    .error__middle-text {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      color: #333333;
+      font-weight: normal;
+    }
+
+    .error__middle-text-button {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+      color: #bf0000;
+      font-weight: bold;
+    }
+
+    .footer {
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+      font-weight: normal;
+    }
+  </style>
+
+  <body>
+    <main>
+      <section class="error__top-text-section">
+        <h1 class="error__top-text">サーバーに接続できません</h1>
+      </section>
+
+      <section class="error__middle-text-section">
+        <h1 class="error__middle-text">
+          ご不便をおかけいたしますが、しばらくしてから再度お試しください。
+        </h1>
+      </section>
+
+      <footer class="footer">© Rakuten</footer>
+    </main>
+
+    <!-- 
+ /**
+ * @date: September 28, 2022
+ * @desc: messageToWeb function is executed on the native side. We are changing 
+ * the webview accordging to the args that are passed on the native side. 
+ * @param {String}: page name.
+ * @return {undefined}
+ */ 
+-->
+
+    <script>
+      function messageToWeb(message) {
+        // Handshake with native
+        if (message && message.eventName === "r_initialise_ccb") {
+          window.messageToNative &&
+            window.messageToNative(
+              JSON.stringify({
+                eventName: "r_ccb_initialised",
+                parameters: {
+                  status: "true",
+                },
+              })
+            );
+        }
+      }
+    </script>
+
+    <!-- 
+ /**
+ * @date: September 28, 2022
+ * @desc: Close webview. 
+ * @return {undefined}
+ */ 
+-->
+    <script>
+      window.closeWebview = function () {
+        window.messageToNative &&
+          window.messageToNative(
+            JSON.stringify({
+              eventName: "r_close_action",
+            })
+          );
+      };
+    </script>
+
+    <script>
+      const closeWebviewButton = document.getElementById(
+        "header__right-icon--close"
+      );
+      const loginAgainButton = document.getElementById(
+        "error__middle-text-button"
+      );
+
+      const commonCloseWebviewButtonClickEvents = () => {
+        window.closeWebview();
+      };
+
+      !!closeWebviewButton &&
+        closeWebviewButton.addEventListener("click", () => {
+          commonCloseWebviewButtonClickEvents();
+        });
+
+      !!loginAgainButton &&
+        loginAgainButton.addEventListener("click", () => {
+          commonCloseWebviewButtonClickEvents();
+        });
+    </script>
+     <input type="hidden" name="rat" id="ratPageName" value="error500">
+    <!-- analysis -->
+    <input type="hidden" name="rat" id="ratAccountId" value="1613">
+<input type="hidden" name="rat" id="ratServiceId" value="1">
+
+<script type="text/javascript" src="//r.r10s.jp/com/rat/js/rat-main.js" async></script>  </body>
+</html>
