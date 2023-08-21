@@ -10,8 +10,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Future<void> _setupRakutenPoint() async {
-    NativeMethod.invokeMethod(NativeMethodType.setupRakutenPoint);
+  Future<String> _setupRakutenPoint() async {
+    return await NativeMethod.invokeMethod(NativeMethodType.setupRakutenPoint);
   }
 
   @override
@@ -48,7 +48,10 @@ class _HomeState extends State<Home> {
               const SizedBox(height: 30.0),
               FilledButton(
                 onPressed: () {
-                  _setupRakutenPoint();
+                  _setupRakutenPoint()
+                    .then((value) => {
+                      print('setupRakutenPoint: value=$value')
+                    });
                 },
                 style: FilledButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 205, 41, 41),
